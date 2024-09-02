@@ -1,0 +1,49 @@
+{
+    "31337": {
+      "exchange": {
+        "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9"
+      },
+      "mUSD": {
+        "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+      },
+      "mTHETA": {
+        "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+      },
+      "mBNB": {
+        "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+      },
+      "explorerURL": "#"
+    },
+      "11155111":{
+        "exchange": {
+          "address": "0xDf41aB0ecE8b103479DE55b1B6D77a313Db46982"
+        },
+        "mUSD": {
+          "address": "0x0dF31c733B23d43802FCCe003BDEBE74abf23070"
+        },
+        "mTHETA": {
+          "address": "0xB1C40D0387642Ab2D51c937AF1ac1D5195773d45"
+        },
+        "mBNB": {
+          "address": "0x9f0A05F4De51c218056aE67c95f3494D32761843"
+        },
+        "explorerURL": "https://sepolia.etherscan.io/"
+      },
+      "80002": {
+	"exchange": {
+		"address": "0x321E18A9FEaa0c4Bd0609b0aD3DBDe21183A9e0a"
+	},
+	"mUSD": {
+		"address": "0x601A9c83312281011BC50AcB8ceB5581fb344cc1"
+	},
+	"mTHETA": {
+		"address": "0x7Cc2Adf9b8c2bF27EF1847d5F30bA27D2b6589a0"
+	},
+	"mBNB": {
+		"address": "0xE408dD0E3BbC02C4084108fDfFB31d556E27594A"
+	},
+	"explorerURL": "https://amoy.polygonscan.com/"
+}
+    }
+
+    
