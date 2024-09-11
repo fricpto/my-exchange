@@ -149,6 +149,107 @@ console.log(`Made order from ${user2.address}`)
 // Wait 1 second
 await wait(1)
 }
+
+console.log('\n')
+
+// user1 transfers 10,000 mBNB...
+transaction = await mBNB.connect(sender).transfer(receiver.address, amount)
+console.log(`Transferred ${amount} tokens from ${sender.address} to ${receiver.address}\n`)
+
+// User 2 Approves mBNB
+transaction = await mBNB.connect(user2).approve(exchange.address, amount)
+await transaction.wait()
+console.log(`Approved ${amount} tokens from ${user2.address}`)
+
+// User 2 Deposits mBNB
+transaction = await exchange.connect(user2).depositToken(mBNB.address, amount)
+await transaction.wait()
+console.log(`Deposited ${amount} tokens from ${user2.address}\n`)
+
+// User 1 makes order to get tokens
+transaction = await exchange.connect(user1).makeOrder(mBNB.address, tokens(100), mUSD.address, tokens(5))
+result = await transaction.wait()
+console.log(`Made order from ${user1.address}`)
+
+// User 1 cancels order
+orderId = result.events[0].args.id
+transaction = await exchange.connect(user1).cancelOrder(orderId)
+result = await transaction.wait()
+console.log(`Cancelled order from ${user1.address}\n`)
+// Wait 1 second
+await wait(1)
+
+/////////////////////////////////////////////////////////////
+// Seed Filled Orders
+//
+
+// User 1 makes order
+transaction = await exchange.connect(user1).makeOrder(mBNB.address, tokens(100), mUSD.address, tokens(10))
+result = await transaction.wait()
+console.log(`Made order from ${user1.address}`)
+
+// User 2 fills order
+orderId = result.events[0].args.id
+transaction = await exchange.connect(user2).fillOrder(orderId)
+result = await transaction.wait()
+console.log(`Filled order from ${user1.address}\n`)
+
+// Wait 1 second
+await wait(1)
+
+// User 1 makes another order
+transaction = await exchange.makeOrder(mBNB.address, tokens(50), mUSD.address, tokens(15))
+result = await transaction.wait()
+console.log(`Made order from ${user1.address}`)
+
+// User 2 fills another order
+orderId = result.events[0].args.id
+transaction = await exchange.connect(user2).fillOrder(orderId)
+result = await transaction.wait()
+console.log(`Filled order from ${user1.address}\n`)
+
+// Wait 1 second
+await wait(1)
+
+
+// User 1 makes final order
+transaction = await exchange.connect(user1).makeOrder(mBNB.address, tokens(200), mUSD.address, tokens(20))
+result = await transaction.wait()
+console.log(`Made order from ${user1.address}`)
+
+// User 2 fills final order
+orderId = result.events[0].args.id
+transaction = await exchange.connect(user2).fillOrder(orderId)
+result = await transaction.wait()
+console.log(`Filled order from ${user1.address}\n`)
+
+// Wait 1 second
+await wait(1)
+/////////////////////////////////////////////////////////////
+// Seed Open Orders
+//
+
+// User 1 makes 10 orders
+for(let i = 1; i <= 10; i++) {
+  transaction = await exchange.connect(user1).makeOrder(mBNB.address, tokens(10 * i), mUSD.address, tokens(10))
+  result = await transaction.wait()
+  
+  console.log(`Made order from ${user1.address}`)
+  
+  // Wait 1 second
+  await wait(1)
+  }
+  
+  // User 2 makes 10 orders
+  for (let i = 1; i <= 10; i++) {
+  transaction = await exchange.connect(user2).makeOrder(mUSD.address, tokens(10), mBNB.address, tokens(10 * i))
+  result = await transaction.wait()
+  
+  console.log(`Made order from ${user2.address}`)
+  
+  // Wait 1 second
+  await wait(1)
+  }
 // Distribute tokens
 
 // Deposit tokens to exchange
